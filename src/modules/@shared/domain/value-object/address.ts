@@ -1,6 +1,8 @@
 import ValueObject from "../../../@shared/domain/value-object/value-object.interface"
+import Id from "./id.value-object"
 
 export default class Address implements ValueObject {
+  _id: Id;
   _street: string = ""
   _number: string = ""
   _complement: string = ""
@@ -8,7 +10,8 @@ export default class Address implements ValueObject {
   _state: string = ""
   _zipCode: string = ""
 
-  constructor(street: string, number: string, complement: string, city: string, state: string, zipCode: string) {
+  constructor(street: string, number: string, complement: string, city: string, state: string, zipCode: string, id?: Id) {
+    this._id = id || new Id();
     this._street = street
     this._number = number
     this._complement = complement
@@ -16,6 +19,10 @@ export default class Address implements ValueObject {
     this._state = state
     this._zipCode = zipCode
 
+  }
+
+  get id(): Id {
+    return this._id;
   }
 
   get street(): string {
